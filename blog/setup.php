@@ -16,3 +16,10 @@ $sql->execute();
 $sql = $database->prepare(
 	"INSERT INTO blog (header, content) VALUES (:header, :content);"
 );
+$sql->execute(array(
+	'header' => "Første blogginnlegg på bloggen",
+	'content' => "hei bloggen! Idag skal jeg snakke om dagens outfit"
+));
+
+
+echo "Created blog table";
