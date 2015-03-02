@@ -23,3 +23,6 @@ $sql->execute(array(
 
 
 echo "Created blog table";
+
+
+//SHUBIDUBIDAA
