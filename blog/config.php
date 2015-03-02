@@ -1,9 +1,22 @@
-<? php
+<?php 
+require "config.php";
+// Create the table: blog
+$sql = $database->prepare(
+	"CREATE TABLE blog (id int NOT NULL AUTO_INCREMENT, header varchar(255), content varchar(255), PRIMARY KEY (id));"
+);
+$sql->execute();
 
-$db_host = "127.0.0.1"; // går til egen maskin
-$db_name = "blog";
-$db_user = "root";
-$db_pass = "";
+// Create the table: comments
+$sql = $database->prepare(
+	"CREATE TABLE comments (id int NOT NULL AUTO_INCREMENT, post_id int NOT NULL, name varchar(255), content varchar(255), PRIMARY KEY (id), FOREIGN KEY (post_id) REFERENCES Blog(id));"
+);
+$sql->execute();
 
-$database = new PDO ("mysql:host=$db_host;dbname=$db_name", $db_user,
-$db_pass);
+// Add some example content to the database
+$sql = $database->prepare(
+	"INSERT INTO blog (header, content) VALUES (:header, :content);"
+);
+$sql->execute(array(
+	'header' => "Første blogginlegg på bloggen!",
+	'content' => "Hei, bloggen. Idag skal jeg snakke om dagens outfit"
+	));
